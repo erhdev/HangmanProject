@@ -1,11 +1,14 @@
 
-var hangmanBank = ["aesthetic" , "vaporwave" , "nostalgia" , "hyper-consumerism"];
+var hangmanBank = ["aesthetic" , "vaporwave" , "nostalgia" , "consume"];
 var userGuesses = 15;
 var userPresses = 0;
 var lettersGuessed = [];
 var wordInPlay = "";
 
 var hangmanWord = hangmanBank[Math.floor(Math.random() * hangmanBank.length)];
+
+// CODE THE GUESSING PART NEXT
+
 
 
 // create empty string
@@ -14,6 +17,7 @@ var hangmanWord = hangmanBank[Math.floor(Math.random() * hangmanBank.length)];
 
 
 (function () {
+    hangmanWord.toUpperCase();
     hangmanLetters = hangmanWord.split("");
     for (i = 0; i < hangmanLetters.length; i++) {
        hangmanLetters.pop();
@@ -23,15 +27,37 @@ var hangmanWord = hangmanBank[Math.floor(Math.random() * hangmanBank.length)];
     gameArea.textContent = display;
     console.log(hangmanWord);
     console.log(hangmanLetters);
+
+
+    document.onkeydown = function() {
+        userPresses++
+        var userLetter = event.key;
+        userLetter.toUpperCase();
+        
+        
+        display.split("");
+        
+        lettersGuessed.splice(userPresses, 0, userLetter.toUpperCase());
+        
+        lettersGuessedDisplay = lettersGuessed;
+        lettersGuessedDisplay.join(",");
+        console.log(userLetter);
+        guessArea.textContent = lettersGuessedDisplay;
+        
+        for (i = 0; i < hangmanWord.length; i++) {
+            if (hangmanWord.charAt(i) === userLetter) {
+                hangmanLetters.splice(i, 1, userLetter);
+            }
+                
+            
+        }
+        console.log(hangmanLetters);
+        display = hangmanLetters.join(" ");
+        gameArea.textContent = display;
+        
+    
+    }    
+    
 } ) ();
 
 
-document.onkeydown = function() {
-    var userPress = event.key;
-    lettersGuessed.splice(userPresses, 0, userPress.toUpperCase());
-    userPresses++
-    lettersGuessedDisplay = lettersGuessed;
-    lettersGuessedDisplay.join(",");
-    console.log(userPress);
-    guessArea.textContent = lettersGuessedDisplay;
-}    
