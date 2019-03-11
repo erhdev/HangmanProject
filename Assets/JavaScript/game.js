@@ -7,7 +7,7 @@ var wordInPlay = "";
 
 var hangmanWord = hangmanBank[Math.floor(Math.random() * hangmanBank.length)];
 
-// CODE THE GUESSING PART NEXT
+// CODE THE GUESS LIMIT AND THE hmanWord OUT OF BEING A GLOBAL  NEXT
 
 
 
