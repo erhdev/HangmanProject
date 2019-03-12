@@ -11,11 +11,32 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <span id="test"></span>
-    <div id ="gameArea"></div>
-    <div id = "guessArea"></div>
-    <div id = "guessesLeft"></div>
+    <div id="gameDisplay">
+      <span id="test"></span>
+      <div>
+          <span id ="wordArea"></span>
+      </div>
+      <br>
+      <div>
+        Letters Guessed:
+         <br>
+         <span id = "guessArea"></span>
+      </div>
+      <br>
+      <div>
+        Guesses Left:
+          <span id = "guessesLeft"></span>
+      </div>
+      <br>
+      <div>
+        Level:
+        <span id = "userLevel"></span>
+      </div>
+    </div>
     
     <script src="Assets/JavaScript/game.js"></script>
+    <audio autoplay loop>
+      <source src="Assets/Media/Audio/Windows96 One Hundred Mornings.mp3">
+    </audio>
   </body>
 </html>

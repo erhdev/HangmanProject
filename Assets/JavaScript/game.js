@@ -1,18 +1,47 @@
-
-// Maybe code different levels of difficulty
-
 // establishing global variables to be used later
-var hangmanBank = ["aesthetic" , "vaporwave" , "nostalgia" , "consume", "music"];
+
+// these variables all relate to the level the user is on and what words they have to guess
+var bank1 = ["aesthetic" , "vaporwave" , "nostalgia" , "consume", "music"];
+var bank2 = ["internet" , "nineties", "pepsi", "samples"];
+var bank3 = ["neon", "mall", "sunset"];
+var bankInUse;
 var bankUsed = 1;
-var userPresses = 0;
-var lettersGuessed = [];
+
 var hangmanWord;
 var userGuesses;
+
+
+// these variables all relate to the user's inputs
+var userPresses = 0;
+var lettersGuessed = [];
 var correctLetters = 0;
 
 function generateWord() {
-    hangmanWord = hangmanBank[Math.floor(Math.random() * hangmanBank.length)];
+    switch (bankUsed) {
+
+    case 1:
+        bankInUse = bank1;       
+    break;
+
+    case 2:
+        bankInUse = bank2;
+    break;
+
+    case 3:
+        bankInUse = bank3;
+    break;
+
+    case 4:
+    break; 
+
+    case 5:
+    break;
+
+    
+    }
+    hangmanWord = bankInUse[Math.floor(Math.random() * bankInUse.length)];
     userGuesses = Math.floor(hangmanWord.length + (hangmanWord.length / 3));
+    userLevel.textContent = bankUsed;
 }
 
 // code to be run upon the loading of the web app. this will pick a word, create a new array the length of the word 
@@ -33,12 +62,12 @@ function setUp() {
        hangmanLetters.unshift("_");    
     }
     display = hangmanLetters.join(" ");
-    gameArea.textContent = display;
+    wordArea.textContent = display;
 }
 
 function success() {
 setUp();
-console.log(hangmanBank);
+console.log(bankInUse);
 
 hangmanWord.toUpperCase();
 hangmanLetters = hangmanWord.split("");
@@ -49,7 +78,7 @@ for (i = 0; i < hangmanLetters.length; i++) {
 }
 
 display = hangmanLetters.join(" ");
-gameArea.textContent = display;
+wordArea.textContent = display;
 
 lettersGuessed = [];
 lettersGuessedDisplay = lettersGuessed;
@@ -70,7 +99,7 @@ function failure() {
        hangmanLetters.unshift("_");    
     }
     display = hangmanLetters.join(" ");
-    gameArea.textContent = display;
+    wordArea.textContent = display;
 
     lettersGuessed = [];
     lettersGuessedDisplay = lettersGuessed;
@@ -117,7 +146,7 @@ document.onkeydown = function() {
         }
     }
     display = hangmanLetters.join(" ");
-    gameArea.textContent = display;
+    wordArea.textContent = display;
     guessesLeft.textContent = userGuesses;
     
     for (i = 0; i < hangmanLetters.length; i++) {
@@ -133,8 +162,16 @@ document.onkeydown = function() {
     } 
     
     if (correctLetters === hangmanWord.length) {
-       console.log(hangmanBank.indexOf(hangmanWord)) 
-       hangmanBank.splice(hangmanBank.indexOf(hangmanWord), 1);
+       console.log(bankInUse.indexOf(hangmanWord)) 
+       bankInUse.splice(bankInUse.indexOf(hangmanWord), 1);
+
+        // this if statement will move the user to the next level if they have completed all the words
+        // on the current level
+
+       if (bankInUse.length === 0) {
+           bankUsed++
+       }
+
        success();
     }  
 }  
@@ -145,3 +182,4 @@ setUp();
 
 
 
+// flavor
