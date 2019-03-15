@@ -9,6 +9,8 @@ var bankUsed = 1;
 
 var hangmanWord;
 var userGuesses;
+var wordsCorrect = [];
+var numWordsCorrect = 0;
 
 
 // these variables all relate to the user's inputs
@@ -54,8 +56,6 @@ function setUp() {
 
     guessesLeft.textContent = userGuesses;
     
-   
-    hangmanWord.toUpperCase();
     hangmanLetters = hangmanWord.split("");
     for (i = 0; i < hangmanLetters.length; i++) {
        hangmanLetters.pop();
@@ -63,13 +63,13 @@ function setUp() {
     }
     display = hangmanLetters.join(" ");
     wordArea.textContent = display;
+    wordsLeft.textContent = bankInUse.length;
 }
 
 function success() {
 setUp();
 console.log(bankInUse);
 
-hangmanWord.toUpperCase();
 hangmanLetters = hangmanWord.split("");
 
 for (i = 0; i < hangmanLetters.length; i++) {
@@ -92,7 +92,6 @@ guessesLeft.textContent = userGuesses;
 function failure() {
     setUp();
 
-    hangmanWord.toUpperCase();
     hangmanLetters = hangmanWord.split("");
     for (i = 0; i < hangmanLetters.length; i++) {
        hangmanLetters.pop();
@@ -107,13 +106,13 @@ function failure() {
     guessArea.textContent = lettersGuessedDisplay;
 
     userGuesses = Math.floor(hangmanWord.length + (hangmanWord.length / 3));
-    guessesLeft.textContent = userGuesses; 
+    guessesLeft.textContent = userGuesses;     
 }
 // This here is the real core of the game. when the user presses a letter, and ONLY a letter, this code will record the letter,
 // write it into an array of guessed letters, increase the number of presses to keep the array in order,  and decrease the number of guesses left.
 // The code will then scan the word in play letter for letter and if the player's guess is in fact a letter in the word, it will replace the appropriate underscore(s)
 // in the hangmanLetters array, and the change will be displayed on the screen. The decrease in guesses left will also be displayed. 
-// The toUpperCase business is for aesthetic value only and may be removed when the CSS is in place. 
+
 
 document.onkeydown = function() {
         
@@ -122,23 +121,43 @@ document.onkeydown = function() {
     
     display.split("");
 
+    // this specifies that the user press must be a letter to be logged
     if ((userLetter === "q") || (userLetter === "w") || (userLetter === "e") || (userLetter === "r") || (userLetter === "t") ||
     (userLetter === "y") || (userLetter === "u") || (userLetter === "i") || (userLetter === "o") || (userLetter === "p") ||
     (userLetter === "a") || (userLetter === "s") || (userLetter === "d") || (userLetter === "f") || (userLetter === "g") ||
     (userLetter === "h") || (userLetter === "j") || (userLetter === "k") || (userLetter === "l") || (userLetter === "z") ||
     (userLetter === "x") || (userLetter === "c") || (userLetter === "v") || (userLetter === "b") || (userLetter === "n") || 
     (userLetter === "m")) {
-        userGuesses--
-        userPresses++ 
-        userLetter.toUpperCase();
-        lettersGuessed.splice(userPresses, 0, userLetter.toUpperCase());
-    }
+                
+                userPresses++
+                repeatLetter = false;
+                
+                // this chain of if statements ignores user presses if the same letter is guessed twice. the for loop scans the array, and if the element at i is the same
+                // as the user's guess, it changes a boolean to true.
+                if (userPresses > 1) {
+
+                for (var i = 0; i < userPresses; i++) {if (userLetter === lettersGuessed[i]) {repeatLetter = true;}} 
+                
+                } else {
+                    lettersGuessed.splice(userPresses, 0, userLetter);
+                    userGuesses--
+                }
+                // if that boolean is true, this array will not make sure the guess is not added to the array. the userPresses > 1 condition is there
+                // because at userPresses = 0 the key will get logged twice without that condition. 
+                if ((repeatLetter !== true) &&  (userPresses > 1 )) {
+                    lettersGuessed.splice(userPresses, 0, userLetter);
+                    userGuesses--
+                } 
+              
+            
+                repeatLetter = false;
+        }
     
     
-    lettersGuessedDisplay = lettersGuessed;
-    lettersGuessedDisplay.join(",");
+    
+    
     console.log(userLetter);
-    guessArea.textContent = lettersGuessedDisplay;
+    guessArea.textContent = lettersGuessed;
     
     for (i = 0; i < hangmanWord.length; i++) {
         if (hangmanWord.charAt(i) === userLetter) {
@@ -156,13 +175,21 @@ document.onkeydown = function() {
     }
     
 
-    // this if statement is the word reset condition. I will add some "and" requirements later to reflect wins and losses.
+    // this if statement defines the success or failure conditions and runs the appropriate function
     if (userGuesses === 0) {
         failure();
     } 
     
     if (correctLetters === hangmanWord.length) {
-       console.log(bankInUse.indexOf(hangmanWord)) 
+    
+       // this chunk of code will add the guessed word to the array wordsCorrect, which then gets
+       // displayed to the user
+
+       wordsCorrect[numWordsCorrect] = (" " + hangmanWord + " ");
+       numWordsCorrect++
+       wordsGuessed.textContent = wordsCorrect;
+
+       // this line deletes the word that was guessed from the bank, which ensures there are no repeats
        bankInUse.splice(bankInUse.indexOf(hangmanWord), 1);
 
         // this if statement will move the user to the next level if they have completed all the words
@@ -176,7 +203,7 @@ document.onkeydown = function() {
     }  
 }  
 
-
+// call setUp to make sure there's something on screen for the user
 setUp();
 
 
