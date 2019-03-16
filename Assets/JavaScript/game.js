@@ -1,6 +1,7 @@
+var username;
 function nameEntry() {
 var usernameArr = [];
-var username;
+
 var isText = false;
 var namePresses = 0;
 
@@ -35,6 +36,8 @@ var namePresses = 0;
  }
 }    
 function runGame() {
+
+username.textContent = username;
 // establishing global variables to be used later
 
 // these variables all relate to the level the user is on and what words they have to guess

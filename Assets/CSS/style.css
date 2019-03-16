@@ -1,3 +1,29 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Times New Roman', Times, serif;
+    overflow: hidden;
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.placeholder {
+    visibility: hidden;
+}
+.center {
+    justify-content: center;
+    text-align: center;
+}
+#intro {
+    width: 100vw;
+    height: 100vh;
+    color: yellow;
+    font-size: xx-large;
+    background-image: url(../Media/Images/intro-background.jpg);
+
+}
 .gameElement {
     display: none;
 }

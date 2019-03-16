@@ -1,83 +1,138 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="Assets/CSS/style.css"></link>
-    <title>Guess</title>
-  </head>
-  <body>
-    <div id=intro>
-    <div id="name">
-      What is your name? <br>
-      <span id="whatisname"></span>
-    </div>
-    <div id="ready?">
-      <span>Are you ready to play?</span> <br>
-      <button id="yes" value="Yes"><span>Yes</span></button>
-    </div>
+<head>
 
-    </div>
-   
-    <div class="gameElement" id="score+username">
-      <span id="username"></span>
-          Score: 
-          <span id="score"></span>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="Assets/CSS/style.css">
+  </link>
+  <title>Guess</title>
+</head>
+
+<body>
+<div id="intro">
+  <div class="row clearfix">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 placeholder"> how do you like this site?</div>
+      </div>
+        <div class="row">
+          <div class="col-12 placeholder">I made it myself</div>
+        </div>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-12 center">
+                <div id="name">
+                    お 名前 <br> (What is your name?) 
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 center">
+                <span id="whatisname"></span>
+              </div>
+            </div>
           </div>
-    <div class="gameElement" id="gameDisplay">   
-      <div>
-          <span id ="wordArea"></span>
-      </div>
-      <br>
-      <div>
-        Letters Guessed:
-         <br>
-         <span id = "guessArea"></span>
-      </div>
-      <br>
-      <div>
-        Guesses Left:
-          <span id = "guessesLeft"></span>
-      </div>
-      <br>
-      <div>
-        Level:
-        <span id = "userLevel"></span>
-      </div>
-      <br>
-      <div>
-        Words Left in Level:
-        <span id = "wordsLeft"></span>
-      </div>
-      <br>
-      <div>
-        Words Guessed:
-        <br>
-        <span id="wordsGuessed"></span>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-12"><span class="placeholder">hide me</span></div>
+        </div>
+
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div id="ready?">
+              <div class="row">
+                <div class="col-12 center">
+                  <span>時々 私  は  非常 に  悲しい <br> (Are you ready to play?) </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 center">
+                  <button id="yes" value="Yes"><span>うん</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
       </div>
     </div>
-
-    <audio id="w96" controls preload="none">
-      <source src="Assets/Media/Audio/Windows96 One Hundred Mornings.mp3" type="audio/mpeg">  
-    </audio>
+  </div>
+  </div>
+<div class="row">
+  <div class="col-12">
     
-    <script src="Assets/JavaScript/game.js"></script>  
-    <script>
-      $(document).ready(function(){
-         nameEntry();
-         $("#yes").on("click" , function() {
-           $("#intro").fadeOut(1000);
-           runGame();
-            $('#w96')[0].play();
-           $(".gameElement").fadeIn(8000);
-         })
-  
+  </div>
+</div>
 
-      });
-    </script>
-  </body>
+  <div class="gameElement" id="score+username">
+    <span id="username"></span>
+    Score:
+    <span id="score"></span>
+  </div>
+  <div class="gameElement" id="gameDisplay">
+    <div>
+      <span id="wordArea"></span>
+    </div>
+    <br>
+    <div>
+      Letters Guessed:
+      <br>
+      <span id="guessArea"></span>
+    </div>
+    <br>
+    <div>
+      Guesses Left:
+      <span id="guessesLeft"></span>
+    </div>
+    <br>
+    <div>
+      Level:
+      <span id="userLevel"></span>
+    </div>
+    <br>
+    <div>
+      Words Left in Level:
+      <span id="wordsLeft"></span>
+    </div>
+    <br>
+    <div>
+      Words Guessed:
+      <br>
+      <span id="wordsGuessed"></span>
+    </div>
+  </div>
+
+  <audio id="w96" controls preload="none">
+    <source src="Assets/Media/Audio/Windows96 One Hundred Mornings.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="Assets/JavaScript/game.js"></script>
+  <script>
+    $(document).ready(function () {
+      nameEntry();
+      $("#yes").on("click", function () {
+        $("#intro").fadeOut(3000);
+
+        runGame();
+        $('#username').text(username);
+        $('#w96')[0].play();
+        $(".gameElement").fadeIn(8000);
+      })
+
+
+    });
+  </script>
+</body>
+
 </html>
