@@ -15,14 +15,14 @@
 </head>
 
 <body>
-<div id="intro">
-  <div class="row clearfix">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-12 placeholder"> how do you like this site?</div>
-      </div>
+  <div id="intro">
+    <div class="row clearfix">
+      <div class="col-12">
         <div class="row">
-          <div class="col-12 placeholder">I made it myself</div>
+          <div class="col-12 placeholder"> how do you like this site?</div>
+        </div>
+        <div class="row">
+          <div class="col-12 placeholder"> i made it myself</div>
         </div>
         <div class="row">
           <div class="col-3"></div>
@@ -30,13 +30,13 @@
             <div class="row">
               <div class="col-12 center">
                 <div id="name">
-                    お 名前 <br> (What is your name?) 
+                  お 名前 <br> (Who are you?)
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-12 center">
-                <span id="whatisname"></span>
+                <p id="whatisname"></p>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-          <div class="col-12"><span class="placeholder">hide me</span></div>
+          <div class="col-12"><span class="placeholder"> nothing to see here </span></div>
         </div>
 
         <div class="row">
@@ -53,7 +53,7 @@
             <div id="ready?">
               <div class="row">
                 <div class="col-12 center">
-                  <span>時々 私  は  非常 に  悲しい <br> (Are you ready to play?) </span>
+                  <span>時々 私 は 非常 に 悲しい <br> (Are you ready to play?) </span>
                 </div>
               </div>
               <div class="row">
@@ -68,50 +68,79 @@
       </div>
     </div>
   </div>
-  </div>
-<div class="row">
-  <div class="col-12">
-    
-  </div>
-</div>
 
-  <div class="gameElement" id="score+username">
-    <span id="username"></span>
-    Score:
-    <span id="score"></span>
+  <div id="game">
+    <div class="row">
+      <div class="col-4">
+        <img  class="statue" src="Assets/Media/Images/90sStatue.gif">
+      </div>
+
+      <div class="col-8-lg">
+        <div class="row">
+          <div class="col-12 placeholder"> i hope you enjoy my website 幸せ な 滞在 し ます</div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="gameElement" id="score+username">
+              <br><br><br>
+              <span id="username"></span>
+
+              <span id="scoreHolder">Score:
+                <span id="score"></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-12">
+            <div class="gameElement" id="gameDisplay">
+              <div>
+                <span id="wordArea"></span>
+              </div>
+              <br>
+              <div>
+                Letters Guessed:
+                <br>
+                <span id="guessArea"></span>
+              </div>
+              <br>
+              <div>
+                Guesses Left:
+                <span id="guessesLeft"></span>
+              </div>
+              <br>
+              <div>
+                Level:
+                <span id="userLevel"></span>
+              </div>
+              <br>
+              <div>
+                Words Left in Level:
+                <span id="wordsLeft"></span>
+              </div>
+              <br>
+              <div>
+                Words Guessed:
+                <br>
+                <span id="wordsGuessed"></span>
+              </div>
+              <div>
+                <br><br><br>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-4">
+        <img class="statue" src="Assets/Media/Images/90sStatue.gif">
+      </div>
+    </div>
   </div>
-  <div class="gameElement" id="gameDisplay">
-    <div>
-      <span id="wordArea"></span>
-    </div>
-    <br>
-    <div>
-      Letters Guessed:
-      <br>
-      <span id="guessArea"></span>
-    </div>
-    <br>
-    <div>
-      Guesses Left:
-      <span id="guessesLeft"></span>
-    </div>
-    <br>
-    <div>
-      Level:
-      <span id="userLevel"></span>
-    </div>
-    <br>
-    <div>
-      Words Left in Level:
-      <span id="wordsLeft"></span>
-    </div>
-    <br>
-    <div>
-      Words Guessed:
-      <br>
-      <span id="wordsGuessed"></span>
-    </div>
-  </div>
+
+
+
 
   <audio id="w96" controls preload="none">
     <source src="Assets/Media/Audio/Windows96 One Hundred Mornings.mp3" type="audio/mpeg">
@@ -122,12 +151,49 @@
     $(document).ready(function () {
       nameEntry();
       $("#yes").on("click", function () {
-        $("#intro").fadeOut(3000);
+        if (username === undefined) {
+          alert("please tell us who you are");
+        } else {
 
-        runGame();
-        $('#username').text(username);
-        $('#w96')[0].play();
-        $(".gameElement").fadeIn(8000);
+          $("#intro").fadeOut(1000);
+
+          var elem = document.documentElement;
+
+          
+          function openFullscreen() {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+              elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { 
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              elem.msRequestFullscreen();
+            }
+          }
+          function closeFullscreen() {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { 
+              document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { 
+              document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { 
+              document.msExitFullscreen();
+            }
+          }
+
+          openFullscreen();
+
+          runGame();
+          $('#username').text(username);
+          $('#w96')[0].play();
+          $("#game").fadeIn(7000);
+          $('.statue').fadeIn(7100);
+          $('#gameDisplay').delay(8345).show(1);
+        
+        }
+
       })
 
 

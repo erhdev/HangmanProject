@@ -21,9 +21,9 @@ var namePresses = 0;
     (nameLetter === "0") || (nameLetter === "!") || (nameLetter === "@") || (nameLetter === "#") || (nameLetter === "$") || 
     (nameLetter === "%") || (nameLetter === "^") || (nameLetter === "&") || (nameLetter === "*") || (nameLetter === "-") || 
     (nameLetter === "_") || (nameLetter === "+") || (nameLetter === "=") || (nameLetter === "?") || (nameLetter === ".") || 
-    (nameLetter === ",") || (nameLetter === "/")  ) {
+    (nameLetter === ",") || (nameLetter === "/") || (nameLetter === "SPACE")  ) {
         namePresses++
-        usernameArr.splice(namePresses, 0, nameLetter);
+        usernameArr.splice(namePresses, 0, nameLetter + " ");
         isText = true;
     }
     username = usernameArr.join("");
@@ -43,7 +43,7 @@ username.textContent = username;
 // these variables all relate to the level the user is on and what words they have to guess
 var bank1 = ["aesthetic" , "vaporwave" , "nostalgia" , "consume", "music"];
 var bank2 = ["internet" , "nineties", "pepsi", "samples"];
-var bank3 = ["neon", "mall", "sunset"];
+var bank3 = ["neon", "mall", "sunset", "palmtree", "pleasure"];
 var bankInUse;
 var bankUsed = 1;
 
@@ -84,6 +84,7 @@ function generateWord() {
     hangmanWord = bankInUse[Math.floor(Math.random() * bankInUse.length)];
     userGuesses = Math.floor(hangmanWord.length + (hangmanWord.length / 3));
     userLevel.textContent = bankUsed;
+    console.log(hangmanWord);
 }
 
 // code to be run upon the loading of the web app. this will pick a word, create a new array the length of the word 

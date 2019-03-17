@@ -23,10 +23,38 @@ html, body {
     font-size: xx-large;
     background-image: url(../Media/Images/intro-background.jpg);
 
+
 }
-.gameElement {
+.statue {
+    margin-top: 80%;
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
     display: none;
 }
-#w96 {
+.gameElement {
+    text-align: center;
+}
+#gameDisplay {
+    background-color: rgb(252, 161, 176);
+    display: none;
+}
+#game{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    font-size: x-large;
+    background-image: url(../Media/Images/gameBackground.gif);
+    background-size: 100%;
+
+}
+#username {
+    float: left;
+}
+#scoreHolder{
+    float: right;
+}
+
+audio {
     display:none;
 }
