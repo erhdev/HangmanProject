@@ -41,9 +41,10 @@ username.textContent = username;
 // establishing global variables to be used later
 
 // these variables all relate to the level the user is on and what words they have to guess
-var bank1 = ["aesthetic" , "vaporwave" , "nostalgia" , "consume", "music"];
-var bank2 = ["internet" , "nineties", "pepsi", "samples"];
-var bank3 = ["neon", "mall", "sunset", "palmtree", "pleasure"];
+var bank1 = ["vaporwave"];
+var bank2 = ["aesthetic" , "statues" , "nostalgia" , "consume", "music"];
+var bank3 = ["internet" , "nineties", "pepsi", "samples"];
+var bank4 = ["neon", "mall", "sunset", "palmtree", "pleasure"];
 var bankInUse;
 var bankUsed = 1;
 
@@ -74,6 +75,7 @@ function generateWord() {
     break;
 
     case 4:
+     bankInUse = bank4;
     break; 
 
     case 5:

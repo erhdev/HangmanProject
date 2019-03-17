@@ -69,32 +69,35 @@
     </div>
   </div>
 
-  <div id="game">
+  <div class="clearfix" id="game">
     <div class="row">
       <div class="col-4">
-        <img  class="statue" src="Assets/Media/Images/90sStatue.gif">
+        <img class="statue" src="Assets/Media/Images/90sStatue.gif">
       </div>
 
-      <div class="col-8-lg">
+      <div class="col-4">
         <div class="row">
-          <div class="col-12 placeholder"> i hope you enjoy my website 幸せ な 滞在 し ます</div>
+          <div class="col-12 placeholder"> i hope you enjoy my website </div>
         </div>
 
         <div class="row">
           <div class="col-12">
-            <div class="gameElement" id="score+username">
-              <br><br><br>
-              <span id="username"></span>
-
-              <span id="scoreHolder">Score:
-                <span id="score"></span></span>
+            <div>
+              <h1 id="username"></h1>
             </div>
           </div>
         </div>
         <div class="row">
 
           <div class="col-12">
-            <div class="gameElement" id="gameDisplay">
+            <br>
+            <div class="gameDisplay">
+              <div class="gameElement">
+              <div>
+                <span id="scoreHolder">Score:
+                  <span id="score"></span></span>
+              </div>
+              <br>
               <div>
                 <span id="wordArea"></span>
               </div>
@@ -126,9 +129,10 @@
                 <span id="wordsGuessed"></span>
               </div>
               <div>
-                <br><br><br>
+                <br><span>幸せ な 滞在 し ます</span><br><br>
               </div>
             </div>
+          </div>
           </div>
 
         </div>
@@ -137,6 +141,7 @@
         <img class="statue" src="Assets/Media/Images/90sStatue.gif">
       </div>
     </div>
+  </div>
   </div>
 
 
@@ -152,36 +157,26 @@
       nameEntry();
       $("#yes").on("click", function () {
         if (username === undefined) {
-          alert("please tell us who you are");
+          alert("please tell us who you are. just type.");
         } else {
 
           $("#intro").fadeOut(1000);
 
           var elem = document.documentElement;
 
-          
+
           function openFullscreen() {
             if (elem.requestFullscreen) {
               elem.requestFullscreen();
             } else if (elem.mozRequestFullScreen) {
               elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) { 
+            } else if (elem.webkitRequestFullscreen) {
               elem.webkitRequestFullscreen();
             } else if (elem.msRequestFullscreen) {
               elem.msRequestFullscreen();
             }
           }
-          function closeFullscreen() {
-            if (document.exitFullscreen) {
-              document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) { 
-              document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { 
-              document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { 
-              document.msExitFullscreen();
-            }
-          }
+
 
           openFullscreen();
 
@@ -189,9 +184,11 @@
           $('#username').text(username);
           $('#w96')[0].play();
           $("#game").fadeIn(7000);
-          $('.statue').fadeIn(7100);
-          $('#gameDisplay').delay(8345).show(1);
-        
+          $('.statue').show()
+          .fadeTo(7500, .8);
+          $('.gameDisplay').delay(8350).show(1);
+          $('#scoreusername').delay(8350).show(1);
+
         }
 
       })
