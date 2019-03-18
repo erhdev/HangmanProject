@@ -36,7 +36,7 @@
             </div>
             <div class="row">
               <div class="col-12 center">
-                <p id="whatisname"></p>
+                <input type="text" id="whatisname"></input>
               </div>
             </div>
           </div>
@@ -93,46 +93,46 @@
             <br>
             <div class="gameDisplay">
               <div class="gameElement">
-              <div>
-                <span id="scoreHolder">Score:
-                  <span id="score"></span></span>
-              </div>
-              <br>
-              <div>
-                <span id="wordArea"></span>
-              </div>
-              <br>
-              <div>
-                Letters Guessed:
+                <div>
+                  <span id="scoreHolder">Score:
+                    <span id="score"></span></span>
+                </div>
                 <br>
-                <span id="guessArea"></span>
-              </div>
-              <br>
-              <div>
-                Guesses Left:
-                <span id="guessesLeft"></span>
-              </div>
-              <br>
-              <div>
-                Level:
-                <span id="userLevel"></span>
-              </div>
-              <br>
-              <div>
-                Words Left in Level:
-                <span id="wordsLeft"></span>
-              </div>
-              <br>
-              <div>
-                Words Guessed:
+                <div>
+                  <span id="wordArea"></span>
+                </div>
                 <br>
-                <span id="wordsGuessed"></span>
-              </div>
-              <div>
-                <br><span>幸せ な 滞在 し ます</span><br><br>
+                <div>
+                  Letters Guessed:
+                  <br>
+                  <span id="guessArea"></span>
+                </div>
+                <br>
+                <div>
+                  Guesses Left:
+                  <span id="guessesLeft"></span>
+                </div>
+                <br>
+                <div>
+                  Level:
+                  <span id="userLevel"></span>
+                </div>
+                <br>
+                <div>
+                  Words Left in Level:
+                  <span id="wordsLeft"></span>
+                </div>
+                <br>
+                <div>
+                  Words Guessed:
+                  <br>
+                  <span id="wordsGuessed"></span>
+                </div>
+                <div>
+                  <br><span>幸せ な 滞在 し ます</span><br><br>
+                </div>
               </div>
             </div>
-          </div>
           </div>
 
         </div>
@@ -142,7 +142,7 @@
       </div>
     </div>
   </div>
-  </div>
+
 
 
 
@@ -154,12 +154,39 @@
   <script src="Assets/JavaScript/game.js"></script>
   <script>
     $(document).ready(function () {
-      nameEntry();
       $("#yes").on("click", function () {
-        if (username === undefined) {
-          alert("please tell us who you are. just type.");
-        } else {
+        if ($('#whatisname').text() === "") {
+          $('#username').text("xUnknown1996x");
+          $("#intro").fadeOut(1000);
 
+          var elem = document.documentElement;
+
+
+          function openFullscreen() {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+              elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              elem.msRequestFullscreen();
+            }
+          }
+
+
+          openFullscreen();
+
+          runGame();
+          $('#username').text($('#whatisname').val());
+          $('#w96')[0].play();
+          $("#game").fadeIn(7000);
+          $('.statue').show()
+            .fadeTo(7500, .8);
+          $('.gameDisplay').delay(8350).show(1);
+          $('#scoreusername').delay(8350).show(1);
+        } else {
+          $('#username').text($('#whatisname').val())
           $("#intro").fadeOut(1000);
 
           var elem = document.documentElement;
@@ -185,7 +212,7 @@
           $('#w96')[0].play();
           $("#game").fadeIn(7000);
           $('.statue').show()
-          .fadeTo(7500, .8);
+            .fadeTo(7500, .8);
           $('.gameDisplay').delay(8350).show(1);
           $('#scoreusername').delay(8350).show(1);
 

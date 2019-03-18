@@ -31,13 +31,11 @@ var namePresses = 0;
     console.log(nameLetter);
     console.log(namePresses);
     console.log(isText);
-    whatisname.textContent = username;
+
     
  }
 }    
 function runGame() {
-
-username.textContent = username;
 // establishing global variables to be used later
 
 // these variables all relate to the level the user is on and what words they have to guess
@@ -51,6 +49,7 @@ var bankUsed = 1;
 var hangmanWord;
 var userGuesses;
 var wordsCorrect = [];
+var userScore = 0;
 var numWordsCorrect = 0;
 
 
@@ -68,14 +67,17 @@ function generateWord() {
 
     case 2:
         bankInUse = bank2;
+        
     break;
 
     case 3:
         bankInUse = bank3;
+        
     break;
 
     case 4:
      bankInUse = bank4;
+     
     break; 
 
     case 5:
@@ -118,17 +120,22 @@ function success() {
        wordsCorrect[numWordsCorrect] = ("  " + hangmanWord + "  ");
        numWordsCorrect++
        wordsGuessed.textContent = wordsCorrect;
-       score.textContent = numWordsCorrect;
-
+      
        // this line deletes the word that was guessed from the bank, which ensures there are no repeats
        bankInUse.splice(bankInUse.indexOf(hangmanWord), 1);
 
         // this if statement will move the user to the next level if they have completed all the words
         // on the current level
-
-       if (bankInUse.length === 0) {
-           bankUsed++
+       
+        if (bankInUse.length === 0) {
+            bankUsed++
        }
+       if ((bankInUse.length === 0) && (bankInUse !== bank1)) {
+           
+       }       
+       userScore++
+       console.log(userScore);
+
 setUp();
 console.log(bankInUse);
 
@@ -168,7 +175,13 @@ function failure() {
     guessArea.textContent = lettersGuessedDisplay;
 
     userGuesses = Math.floor(hangmanWord.length + (hangmanWord.length / 3));
-    guessesLeft.textContent = userGuesses;     
+    guessesLeft.textContent = userGuesses;  
+    if (userScore === 1) {
+        userScore = userScore;
+    } else {
+        userScore--
+    }
+    console.log(userScore);
 }
 
 // This here is the real core of the game. when the user presses a letter, and ONLY a letter, this code will record the letter,
@@ -183,6 +196,15 @@ document.onkeydown = function() {
     var correctLetters = 0;
     
     display.split("");
+    if (
+    (userLetter === "Q") || (userLetter === "W") || (userLetter === "E") || (userLetter === "R") || 
+    (userLetter === "T") || (userLetter === "Y") || (userLetter === "U") || (userLetter === "I") || (userLetter === "O") || 
+    (userLetter === "P") || (userLetter === "A") || (userLetter === "S") || (userLetter === "D") || (userLetter === "F") || (userLetter === "G") ||
+    (userLetter === "H") || (userLetter === "J") || (userLetter === "K") || (userLetter === "L") || (userLetter === "Z") ||
+    (userLetter === "X") || (userLetter === "C") || (userLetter === "V") || (userLetter === "B") || 
+    (userLetter === "N") || (userLetter === "M") ) {
+        userLetter = userLetter.toLowerCase();
+    }
 
     // this specifies that the user press must be a letter to be logged
     if ((userLetter === "q") || (userLetter === "w") || (userLetter === "e") || (userLetter === "r") || (userLetter === "t") ||
@@ -191,7 +213,7 @@ document.onkeydown = function() {
     (userLetter === "h") || (userLetter === "j") || (userLetter === "k") || (userLetter === "l") || (userLetter === "z") ||
     (userLetter === "x") || (userLetter === "c") || (userLetter === "v") || (userLetter === "b") || (userLetter === "n") || 
     (userLetter === "m")) {
-                
+                userLetter.toLowerCase();
                 userPresses++
                 repeatLetter = false;
                 
@@ -236,17 +258,22 @@ document.onkeydown = function() {
     
 
     // this if statement defines the success or failure conditions and runs the appropriate function
-    if (userGuesses === 0) {
-        failure();
-    } 
     
     if (correctLetters === hangmanWord.length) {
         success();
-    }  
+        score.textContent = userScore.toString();
+    }  else if (userGuesses === 0) {
+        failure();
+        score.textContent = userScore.toString();
+    } 
+    
+    
 }  
 
 // call setUp to make sure there's something on screen for the user
 setUp();
+
 //fin
 }
+    
 
